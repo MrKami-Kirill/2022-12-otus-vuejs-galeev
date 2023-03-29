@@ -1,41 +1,28 @@
 <template>
-  <section class="posts">
-    <details @click="getPosts">
-      <summary>Posts</summary>
-      <post v-for="post in posts"
+  <div class="posts">
+      <post v-for="post in props.posts"
             :key="post.id"
             :post="post"
-            @delete-post="deletePost(post.id)">
+            @delete-post="$emit('delete-post', deletePost(post.id))">
       </post>
-    </details>
-  </section>
+  </div>
 </template>
 
 <script setup>
 import Post from "./Post.vue";
 import axios from "axios";
-import {ref} from "vue";
 
-const posts = ref([])
+const props = defineProps(['posts'])
 
-function getPosts() {
-  if (posts.value.length === 0) {
-    axios.get('https://jsonplaceholder.typicode.com/posts')
-    .then((response) => {
-      console.log(response)
-      posts.value = response.data
-    })
-  } else {
-    posts.value
-  }
-}
+const emit = defineEmits();
 
 function deletePost(id) {
   axios.delete('https://jsonplaceholder.typicode.com/posts/' + id)
   .then((response) => {
     console.log(response)
-    posts.value = posts.value.filter(p => p.id !== id)
   })
+  emit('delete-post', id)
+  return id
 }
 </script>
 
