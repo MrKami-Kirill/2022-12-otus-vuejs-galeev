@@ -1,9 +1,6 @@
 <template>
-  <section class="postApp">
-    <add-post></add-post>
-    <br>
-    <posts></posts>
-  </section>
+  <add-post></add-post>
+  <posts></posts>
 </template>
 
 <style scoped>
