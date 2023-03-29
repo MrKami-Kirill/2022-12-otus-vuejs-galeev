@@ -14,7 +14,7 @@ import axios from "axios";
 
 const props = defineProps(['posts'])
 
-const emit = defineEmits();
+const emit = defineEmits(['delete-post']);
 
 function deletePost(id) {
   axios.delete('https://jsonplaceholder.typicode.com/posts/' + id)
