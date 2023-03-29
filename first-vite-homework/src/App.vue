@@ -1,6 +1,6 @@
 <template>
   <details @click="getPosts">
-    <summary>Posts</summary>
+    <summary>Post List</summary>
     <add-post :posts="posts"></add-post>
     <posts :posts="posts"
            @posts="getPosts"
